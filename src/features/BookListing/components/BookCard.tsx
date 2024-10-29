@@ -26,20 +26,20 @@ interface Props {
 const BookCard: FC<Props> = ({ bookDetails }): JSX.Element | null => {
   if (isEmpty(bookDetails)) return null;
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 345 }} aria-label="book-card">
       <CardHeader
         avatar={
           <Avatar
-            aria-label="recipe"
-            sx={{ bgcolor: stringToColor(bookDetails?.name) }}
+            aria-label="author-logo"
+            sx={{ bgcolor: stringToColor(bookDetails?.author) }}
           >
-            {getNameFirstCharacter(bookDetails?.name)}
+            {getNameFirstCharacter(bookDetails?.author)}
           </Avatar>
         }
         title={bookDetails?.name}
         subheader={
           <Box className="d-flex align-items-center gap-8">
-            {bookDetails?.author} <DividerDot size="small" />
+            <span>{bookDetails?.author}</span> <DividerDot size="small" />
             {dateFormatter(bookDetails?.createdAt, "MMMM Do YYYY")}
           </Box>
         }
