@@ -68,3 +68,12 @@
 }
 
 /* modal end */
+
+/* Divider dot start */
+
+.divider-dot{
+    border-radius: 50%;
+    background-color: #cecece;
+}
+
+/* Divider dot end */
