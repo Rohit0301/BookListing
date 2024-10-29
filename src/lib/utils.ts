@@ -1,4 +1,5 @@
 import moment from "moment";
+import { IBook } from "../features/BookListing/types";
 
 export const getNameFirstCharacter = (name: string): string => {
   if (!name) return "";
@@ -48,4 +49,19 @@ export const stringToColor = (name: string): string => {
   }
 
   return color;
+};
+
+export const parseDataWithDate = (bookList: IBook[] | null): IBook[] | null => {
+  if (Array.isArray(bookList)) {
+    return bookList.map(
+      (book: IBook): IBook =>
+        book?.createdAt
+          ? {
+              ...book,
+              createdAt: new Date(book?.createdAt),
+            }
+          : book
+    );
+  }
+  return bookList;
 };
