@@ -5,6 +5,7 @@ import BookCard from "../components/BookCard";
 import { dateFormatter, getNameFirstCharacter } from "../../../lib/utils";
 
 const sampleBookDetails: IBook = {
+  id: 1,
   name: "Harry potter",
   author: "J. K. Rowling",
   createdAt: new Date(),
