@@ -6,6 +6,7 @@ describe("localStorage Utility Functions", () => {
   const sampleKey = "bookList";
   const sampleBookList: IBook[] = [
     {
+      id: 1,
       name: "Harry potter",
       author: "J. K. Rowling",
       createdAt: new Date(),

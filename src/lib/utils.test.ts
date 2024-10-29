@@ -1,10 +1,10 @@
-import { IBook } from "../features/BookListing/types";
 import {
+  isEmpty,
   dateFormatter,
   getNameFirstCharacter,
-  isEmpty,
   parseDataWithDate,
 } from "./utils";
+import { IBook } from "../features/BookListing/types";
 
 describe("getNameFirstCharacter", () => {
   test("returns first character in uppercase for a non-empty string", () => {
