@@ -5,6 +5,7 @@ import {
   ReactNode,
   useEffect,
   createContext,
+  useContext,
 } from "react";
 import { IBook } from "../../features/BookListing/types";
 import { getDataFromStorage, setDataToStorage } from "../../lib/storage";
@@ -20,7 +21,7 @@ interface IBookListingContext {
   setSeletedBook: (book: IBook | null) => void;
 }
 
-export const bookListingContext: Context<IBookListingContext | null> =
+export const BookListingContext: Context<IBookListingContext | null> =
   createContext<IBookListingContext | null>(null);
 
 export const BookListingProvider: FC<{ children: ReactNode }> = ({
@@ -62,7 +63,7 @@ export const BookListingProvider: FC<{ children: ReactNode }> = ({
   };
 
   return (
-    <bookListingContext.Provider
+    <BookListingContext.Provider
       value={{
         bookList,
         selectedBook,
@@ -73,6 +74,14 @@ export const BookListingProvider: FC<{ children: ReactNode }> = ({
       }}
     >
       {children}
-    </bookListingContext.Provider>
+    </BookListingContext.Provider>
   );
+};
+
+export const useBookContext = (): IBookListingContext | null => {
+  const context: IBookListingContext | null = useContext(BookListingContext);
+  if (context === undefined) {
+    throw new Error("useBookContext must be used within a BookListingProvider");
+  }
+  return context;
 };
