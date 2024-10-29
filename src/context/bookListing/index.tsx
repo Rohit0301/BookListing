@@ -13,7 +13,7 @@ import { getDataFromStorage, setDataToStorage } from "../../lib/storage";
 const BOOK_LIST_KEY = "book-list";
 
 interface IBookListingContext {
-  bookList: IBook[];
+  booksList: IBook[];
   selectedBook: IBook | null;
   addNewBook: (book: IBook) => void;
   editBookDetails: (book: IBook) => void;
@@ -27,7 +27,7 @@ export const BookListingContext: Context<IBookListingContext | null> =
 export const BookListingProvider: FC<{ children: ReactNode }> = ({
   children,
 }): JSX.Element => {
-  const [bookList, setBookList] = useState<IBook[]>([]);
+  const [booksList, setBooksList] = useState<IBook[]>([]);
   const [selectedBook, setSeletedBook] = useState<IBook | null>(null);
 
   useEffect(() => {
@@ -35,28 +35,28 @@ export const BookListingProvider: FC<{ children: ReactNode }> = ({
   }, []);
 
   const loadBooksFromStorage = (): void => {
-    setBookList(getDataFromStorage(BOOK_LIST_KEY) || []);
+    setBooksList(getDataFromStorage(BOOK_LIST_KEY) || []);
   };
 
   const storeDataToState = (bookList: IBook[]): void => {
-    setBookList(bookList);
+    setBooksList(bookList);
     setDataToStorage(BOOK_LIST_KEY, bookList);
   };
 
   const addNewBook = (book: IBook): void => {
-    const updateBookList: IBook[] = [...bookList, book];
+    const updateBookList: IBook[] = [...booksList, book];
     storeDataToState(updateBookList);
   };
 
   const editBookDetails = (updatedBook: IBook): void => {
-    const updateBookList: IBook[] = bookList.map((book: IBook) =>
+    const updateBookList: IBook[] = booksList.map((book: IBook) =>
       book.id === updatedBook.id ? { ...book, ...updatedBook } : book
     );
     storeDataToState(updateBookList);
   };
 
   const removeBookFromList = (bookId: number): void => {
-    const updateBookList: IBook[] = bookList.filter(
+    const updateBookList: IBook[] = booksList.filter(
       (book: IBook) => book.id !== bookId
     );
     storeDataToState(updateBookList);
@@ -65,7 +65,7 @@ export const BookListingProvider: FC<{ children: ReactNode }> = ({
   return (
     <BookListingContext.Provider
       value={{
-        bookList,
+        booksList,
         selectedBook,
         addNewBook,
         editBookDetails,

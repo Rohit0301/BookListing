@@ -19,6 +19,8 @@ import {
 import DividerDot from "../../../components/ui/DividerDot";
 import CustomButton from "../../../components/ui/CustomButton";
 
+import styles from "../styles.module.css";
+
 interface Props {
   bookDetails: IBook;
 }
@@ -45,7 +47,11 @@ const BookCard: FC<Props> = ({ bookDetails }): JSX.Element | null => {
         }
       />
       <CardContent sx={{ pt: 0 }}>
-        <Typography variant="body2" sx={{ color: "text.secondary" }}>
+        <Typography
+          variant="body2"
+          sx={{ color: "text.secondary" }}
+          className={styles.book_description}
+        >
           {bookDetails?.description}
         </Typography>
       </CardContent>
