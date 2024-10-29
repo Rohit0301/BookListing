@@ -1,4 +1,10 @@
-import { dateFormatter, getNameFirstCharacter, isEmpty } from "./utils";
+import { IBook } from "../features/BookListing/types";
+import {
+  dateFormatter,
+  getNameFirstCharacter,
+  isEmpty,
+  parseDataWithDate,
+} from "./utils";
 
 describe("getNameFirstCharacter", () => {
   test("returns first character in uppercase for a non-empty string", () => {
@@ -56,5 +62,22 @@ describe("dateFormatter", () => {
     expect(dateFormatter(new Date("invalid-date"), "YYYY-MM-DD")).toBe("");
     expect(dateFormatter(null as any, "YYYY-MM-DD")).toBe("");
     expect(dateFormatter(undefined as any, "YYYY-MM-DD")).toBe("");
+  });
+});
+
+describe("parseDataWithDate", () => {
+  const date: Date = new Date();
+  test("return date with Date type instead of string type", () => {
+    expect(
+      parseDataWithDate([
+        { createdAt: `${date}` },
+      ] as any)?.[0]?.createdAt.getDate()
+    ).toEqual(date.getDate());
+  });
+
+  test("return same if createat not present in object", () => {
+    expect(parseDataWithDate([{ name: "Harry Potter" }] as IBook[])).toEqual([
+      { name: "Harry Potter" },
+    ]);
   });
 });
