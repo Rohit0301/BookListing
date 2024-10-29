@@ -28,7 +28,7 @@ export const isEmpty = (
 };
 
 export const dateFormatter = (date: Date, format: string): string => {
-  if (!(date instanceof Date)) {
+  if (!(date instanceof Date) || isNaN(date.getTime())) {
     return "";
   }
 
