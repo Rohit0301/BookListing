@@ -1,10 +1,10 @@
-import React from "react";
+import { Books } from "../features/BookListing";
 import { BookListingProvider } from "../context/bookListing";
 
 const BookListing = () => {
   return (
     <BookListingProvider>
-      <div>BookListing</div>
+      <Books />
     </BookListingProvider>
   );
 };
