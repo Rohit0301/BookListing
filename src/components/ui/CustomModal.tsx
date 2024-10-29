@@ -1,6 +1,7 @@
-import { Box, Modal } from "@mui/material";
+import Box from "@mui/material/Box";
+import  Modal from "@mui/material/Modal";
+import CloseOutlined from "@mui/icons-material/CloseOutlined";
 import React, { FC, Fragment, MouseEvent, ReactNode } from "react";
-import { CloseOutlined } from "@mui/icons-material";
 
 import CustomButton from "./CustomButton";
 
