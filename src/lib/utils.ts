@@ -1,5 +1,5 @@
 import moment from "moment";
-import { IBook } from "../features/BookListing/types";
+import { IBook } from "../features/listBooks/types";
 
 export const getNameFirstCharacter = (name: string): string => {
   if (!name) return "";
