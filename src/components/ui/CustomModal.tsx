@@ -1,10 +1,10 @@
 import Box from "@mui/material/Box";
-import  Modal from "@mui/material/Modal";
+import Modal from "@mui/material/Modal";
+import Typography  from "@mui/material/Typography";
 import CloseOutlined from "@mui/icons-material/CloseOutlined";
 import React, { FC, Fragment, MouseEvent, ReactNode } from "react";
 
 import CustomButton from "./CustomButton";
-
 
 interface Props {
   title: string;
@@ -49,8 +49,11 @@ const CustomModal: FC<Props> = ({
       <ButtomComponent label={buttonText} onClick={handleOpen} />
       <Modal open={open} onClose={handleClose}>
         <Box className="custom-modal">
-          <Box className="modal-header">
-            <Box className="title">{title}</Box>
+          <Box
+            className="modal-header d-flex align-items-center justify-content-between"
+            sx={{ p: 1, borderBottom: 1, borderColor: "#cecece" }}
+          >
+            <Typography variant="h6">{title}</Typography>
             <CustomButton
               color="info"
               label="close-modal-btn"
@@ -60,7 +63,14 @@ const CustomModal: FC<Props> = ({
           </Box>
           {Boolean(modalBody) && modalBody}
           {showFooter && (
-            <Box className="modal-footer">
+            <Box
+              className="modal-footer d-flex align-items-center justify-content-end gap-12"
+              sx={{
+                borderTop: !Boolean(modalBody) ? "none" : 1,
+                borderColor: "#cecece",
+                p: 1,
+              }}
+            >
               <CustomButton
                 color="secondary"
                 onClick={handleCancel}
