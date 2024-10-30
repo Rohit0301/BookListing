@@ -50,7 +50,7 @@ const CustomModal: FC<Props> = ({
       <Modal open={open} onClose={handleClose}>
         <Box className="custom-modal">
           <Box
-            className="modal-header d-flex align-items-center justify-content-between"
+            className="d-flex align-items-center justify-content-between"
             sx={{ p: 1, borderBottom: 1, borderColor: "#cecece" }}
           >
             <Typography variant="h6">{title}</Typography>
@@ -64,7 +64,7 @@ const CustomModal: FC<Props> = ({
           {Boolean(modalBody) && modalBody}
           {showFooter && (
             <Box
-              className="modal-footer d-flex align-items-center justify-content-end gap-12"
+              className="d-flex align-items-center justify-content-end gap-12"
               sx={{
                 borderTop: !Boolean(modalBody) ? "none" : 1,
                 borderColor: "#cecece",

@@ -1,4 +1,4 @@
-import { IBook } from "./types";
+import { IBook } from "../../types";
 import Grid2 from "@mui/material/Grid2";
 import { isEmpty } from "../../lib/utils";
 import BookCard from "./components/BookCard";

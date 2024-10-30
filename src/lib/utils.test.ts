@@ -4,7 +4,7 @@ import {
   getNameFirstCharacter,
   parseDataWithDate,
 } from "./utils";
-import { IBook } from "../features/listBooks/types";
+import { IBook } from "../types";
 
 describe("getNameFirstCharacter", () => {
   test("returns first character in uppercase for a non-empty string", () => {

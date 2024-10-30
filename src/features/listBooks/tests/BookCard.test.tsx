@@ -1,6 +1,6 @@
 import { screen, render } from "@testing-library/react";
 
-import { IBook } from "../types";
+import { IBook } from "../../../types";
 import BookCard from "../components/BookCard";
 import { dateFormatter, getNameFirstCharacter } from "../../../lib/utils";
 
