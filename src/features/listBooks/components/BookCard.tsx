@@ -19,8 +19,6 @@ import {
 import DividerDot from "../../../components/ui/DividerDot";
 import CustomButton from "../../../components/ui/CustomButton";
 
-import styles from "../styles.module.css";
-
 interface Props {
   bookDetails: IBook;
 }
@@ -28,7 +26,7 @@ interface Props {
 const BookCard: FC<Props> = ({ bookDetails }): JSX.Element | null => {
   if (isEmpty(bookDetails)) return null;
   return (
-    <Card sx={{ maxWidth: 345 }} aria-label="book-card">
+    <Card sx={{ minHeight: 200 }} aria-label="book-card">
       <CardHeader
         avatar={
           <Avatar
@@ -49,8 +47,13 @@ const BookCard: FC<Props> = ({ bookDetails }): JSX.Element | null => {
       <CardContent sx={{ pt: 0 }}>
         <Typography
           variant="body2"
-          sx={{ color: "text.secondary" }}
-          className={styles.book_description}
+          sx={{
+            color: "text.secondary",
+            overflow: "hidden",
+            display: "-webkit-box",
+            WebkitLineClamp: "3",
+            WebkitBoxOrient: "vertical",
+          }}
         >
           {bookDetails?.description}
         </Typography>
