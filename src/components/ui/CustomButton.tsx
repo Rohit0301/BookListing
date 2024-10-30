@@ -1,8 +1,7 @@
-import Button  from "@mui/material/Button";
+import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import { FC, Fragment, MouseEvent, ReactNode } from "react";
 
-import "./styles.css"
 
 interface Props {
   label: string;
@@ -22,11 +21,27 @@ const CustomButton: FC<Props> = ({
   return (
     <Fragment>
       {Icon ? (
-        <IconButton onClick={onClick} className="icon-button" aria-label={label} color={color} sx={{ p: 0}}>
+        <IconButton
+          onClick={onClick}
+          aria-label={label}
+          color={color}
+          sx={{
+            p: 0,
+            "&:focus": {
+              outline: "none",
+            },
+          }}
+        >
           {Icon}
         </IconButton>
       ) : (
-        <Button variant="contained" size="medium" color={color} onClick={onClick} {...otherProps}>
+        <Button
+          variant="contained"
+          size="medium"
+          color={color}
+          onClick={onClick}
+          {...otherProps}
+        >
           {label}
         </Button>
       )}

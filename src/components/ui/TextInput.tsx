@@ -1,13 +1,13 @@
 import React, { FC } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
+import InputLabel from "@mui/material/InputLabel";
 
-import "./styles.css";
 
 interface Props {
   id: string;
   label: string;
-  error: string;
+  error?: string;
   onChange: (
     value: string,
     name: string,
@@ -32,8 +32,8 @@ const TextInput: FC<Props> = ({
   otherProps = {},
 }) => {
   return (
-    <Box className="text-field-container">
-      <label htmlFor={id}>{label}</label>
+    <Box>
+      <InputLabel htmlFor={id}>{label}</InputLabel>
       <TextField
         id={id}
         error={Boolean(error)}
