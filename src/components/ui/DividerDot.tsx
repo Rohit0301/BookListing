@@ -6,7 +6,7 @@ interface Props {
   sx?: object;
 }
 
-const SIZES: { [key: string]: { width: string; height: string } } = {
+export const SIZES: { [key: string]: { width: string; height: string } } = {
   small: {
     width: "4px",
     height: "4px",
@@ -23,7 +23,8 @@ const SIZES: { [key: string]: { width: string; height: string } } = {
 
 const DividerDot: FC<Props> = ({ size, sx = {} }) => {
   return (
-    <Box
+    <Box 
+      aria-label="divider-dot"
       sx={{ borderRadius: "50%", bgcolor: "#cecece", ...SIZES[size], ...sx }}
     ></Box>
   );

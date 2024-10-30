@@ -13,7 +13,7 @@ interface Props {
     name: string,
     event: React.ChangeEvent<HTMLInputElement>
   ) => void;
-  value: string;
+  value?: string;
   rows?: number;
   placeholder?: string;
   multiline?: boolean;
