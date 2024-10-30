@@ -8,7 +8,7 @@ import CustomButton from "./CustomButton";
 
 interface Props {
   title: string;
-  modalBody: ReactNode;
+  modalBody?: ReactNode;
   showFooter?: boolean;
   buttonText?: string;
   cancelText?: string;
@@ -58,7 +58,7 @@ const CustomModal: FC<Props> = ({
               Icon={<CloseOutlined />}
             />
           </Box>
-          {modalBody}
+          {Boolean(modalBody) && modalBody}
           {showFooter && (
             <Box className="modal-footer">
               <CustomButton
