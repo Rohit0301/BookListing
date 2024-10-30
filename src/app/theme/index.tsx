@@ -1,6 +1,9 @@
 import { FC, ReactNode } from "react";
 import { ThemeProvider, createTheme, ThemeOptions } from "@mui/material";
 
+import { modalStyles } from "./modal";
+import { textInputStyles } from "./textInput";
+
 export const themeOptions: ThemeOptions = {
   palette: {
     primary: {
@@ -18,6 +21,10 @@ export const themeOptions: ThemeOptions = {
     borderRadius: 4,
   },
   spacing: 8,
+  components: {
+    ...textInputStyles,
+    ...modalStyles
+  },
 };
 
 const theme = createTheme(themeOptions);

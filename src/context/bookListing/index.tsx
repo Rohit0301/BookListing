@@ -7,6 +7,7 @@ import {
   createContext,
   useContext,
 } from "react";
+import { parseDataWithDate } from "../../lib/utils";
 import { IBook } from "../../features/listBooks/types";
 import { getDataFromStorage, setDataToStorage } from "../../lib/storage";
 
@@ -35,7 +36,7 @@ export const BookListingProvider: FC<{ children: ReactNode }> = ({
   }, []);
 
   const loadBooksFromStorage = (): void => {
-    setBooksList(getDataFromStorage(BOOK_LIST_KEY) || []);
+    setBooksList(parseDataWithDate(getDataFromStorage(BOOK_LIST_KEY)) || []);
   };
 
   const storeDataToState = (bookList: IBook[]): void => {

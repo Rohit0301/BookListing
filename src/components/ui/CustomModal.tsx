@@ -5,7 +5,6 @@ import React, { FC, Fragment, MouseEvent, ReactNode } from "react";
 
 import CustomButton from "./CustomButton";
 
-import "./styles.css";
 
 interface Props {
   title: string;

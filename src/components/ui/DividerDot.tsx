@@ -1,8 +1,6 @@
 import { FC } from "react";
 import { Box } from "@mui/material";
 
-import "./styles.css";
-
 interface Props {
   size: "small" | "medium" | "large";
   sx?: object;
@@ -24,6 +22,10 @@ const SIZES: { [key: string]: { width: string; height: string } } = {
 };
 
 const DividerDot: FC<Props> = ({ size, sx = {} }) => {
-  return <Box className="divider-dot" sx={{ ...SIZES[size], ...sx }}></Box>;
+  return (
+    <Box
+      sx={{ borderRadius: "50%", bgcolor: "#cecece", ...SIZES[size], ...sx }}
+    ></Box>
+  );
 };
 export default DividerDot;
