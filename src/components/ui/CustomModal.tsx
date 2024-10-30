@@ -1,8 +1,14 @@
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import Typography  from "@mui/material/Typography";
+import Typography from "@mui/material/Typography";
 import CloseOutlined from "@mui/icons-material/CloseOutlined";
-import React, { FC, Fragment, MouseEvent, ReactNode } from "react";
+import React, {
+  FC,
+  Fragment,
+  MouseEvent,
+  ReactElement,
+  ReactNode,
+} from "react";
 
 import CustomButton from "./CustomButton";
 
@@ -13,9 +19,10 @@ interface Props {
   buttonText?: string;
   cancelText?: string;
   okText?: string;
+  okButtonProps?: object;
   onCancel?: (event: MouseEvent<HTMLButtonElement>) => void;
   onOk?: (event: MouseEvent<HTMLButtonElement>) => void;
-  ButtomComponent?: FC;
+  buttonComponent?: ReactElement;
 }
 
 const CustomModal: FC<Props> = ({
@@ -26,8 +33,9 @@ const CustomModal: FC<Props> = ({
   cancelText = "Cancel",
   okText = "Save",
   showFooter = false,
-  ButtomComponent = CustomButton,
+  buttonComponent = null,
   buttonText = "Open",
+  okButtonProps = {}
 }) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
@@ -46,14 +54,19 @@ const CustomModal: FC<Props> = ({
   };
   return (
     <Fragment>
-      <ButtomComponent label={buttonText} onClick={handleOpen} />
+      {buttonComponent ? (
+         React.cloneElement(buttonComponent, { label: buttonText, onClick: handleOpen })
+      ) : (
+        <CustomButton label={buttonText} onClick={handleOpen} />
+      )}
+
       <Modal open={open} onClose={handleClose}>
         <Box className="custom-modal">
           <Box
             className="d-flex align-items-center justify-content-between"
             sx={{ p: 1, borderBottom: 1, borderColor: "#cecece" }}
           >
-            <Typography variant="h6">{title}</Typography>
+            <Typography variant="subtitle1">{title}</Typography>
             <CustomButton
               color="info"
               label="close-modal-btn"
@@ -75,9 +88,10 @@ const CustomModal: FC<Props> = ({
                 color="secondary"
                 onClick={handleCancel}
                 label={cancelText}
+                otherProps={{ variant: "outlined"}}
               />
               {Boolean(onOk) && (
-                <CustomButton onClick={handleOk} label={okText} />
+                <CustomButton onClick={handleOk} label={okText} {...okButtonProps} />
               )}
             </Box>
           )}

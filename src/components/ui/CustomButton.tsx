@@ -6,7 +6,7 @@ import { FC, Fragment, MouseEvent, ReactNode } from "react";
 interface Props {
   label: string;
   Icon?: ReactNode;
-  onClick: (event: MouseEvent<HTMLButtonElement>) => void;
+  onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
   color?: "primary" | "secondary" | "success" | "error" | "info" | "warning";
   otherProps?: object;
 }
@@ -37,7 +37,8 @@ const CustomButton: FC<Props> = ({
       ) : (
         <Button
           variant="contained"
-          size="medium"
+          size="small"
+          aria-label={label}
           color={color}
           onClick={onClick}
           {...otherProps}

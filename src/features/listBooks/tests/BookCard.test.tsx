@@ -3,15 +3,9 @@ import { screen, render } from "@testing-library/react";
 import { IBook } from "../../../types";
 import BookCard from "../components/BookCard";
 import { dateFormatter, getNameFirstCharacter } from "../../../lib/utils";
+import { mockBooksList } from "../../../constants/mock";
 
-const sampleBookDetails: IBook = {
-  id: 1,
-  name: "Harry potter",
-  author: "J. K. Rowling",
-  createdAt: new Date(),
-  description:
-    "Harry Potter is a series of seven fantasy novels written by British author J. K. Rowling. The novels chronicle the lives of a young wizard, Harry Potter, and his friends, Hermione Granger and Ron Weasley, all of whom are students at Hogwarts School of Witchcraft and Wizardry. ",
-};
+const sampleBookDetails: IBook = mockBooksList[0]
 
 describe("Book Card", () => {
   test("Render Book card correctly if book details present", () => {
