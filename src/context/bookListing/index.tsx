@@ -8,7 +8,7 @@ import {
   useContext,
 } from "react";
 import { parseDataWithDate } from "../../lib/utils";
-import { IBook } from "../../features/listBooks/types";
+import { IBook } from "../../types";
 import { getDataFromStorage, setDataToStorage } from "../../lib/storage";
 
 const BOOK_LIST_KEY = "book-list";

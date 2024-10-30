@@ -9,7 +9,7 @@ import CardHeader from "@mui/material/CardHeader";
 import DeleteOutline from "@mui/icons-material/DeleteOutline";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 
-import { IBook } from "../types";
+import { IBook } from "../../../types";
 import {
   isEmpty,
   dateFormatter,

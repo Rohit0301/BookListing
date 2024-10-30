@@ -1,4 +1,4 @@
-import { IBook } from "../features/listBooks/types";
+import { IBook } from "../types";
 import { setDataToStorage, getDataFromStorage } from "./storage";
 import { parseDataWithDate } from "./utils";
 

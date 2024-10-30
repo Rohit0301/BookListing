@@ -1,7 +1,7 @@
 import { screen, render } from "@testing-library/react";
 
 import { Books } from "..";
-import { IBook } from "../types";
+import { IBook } from "../../../types";
 import { useBookContext } from "../../../context/bookListing";
 
 jest.doMock("../components/BookCard", () => {
