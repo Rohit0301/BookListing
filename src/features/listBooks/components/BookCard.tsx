@@ -28,7 +28,7 @@ interface Props {
 const BookCard: FC<Props> = ({ bookDetails }): JSX.Element | null => {
   if (isEmpty(bookDetails)) return null;
   return (
-    <Card sx={{ minHeight: 200 }} aria-label="book-card">
+    <Card sx={{ height: 200 }} aria-label="book-card">
       <CardHeader
         avatar={
           <Avatar
@@ -41,12 +41,33 @@ const BookCard: FC<Props> = ({ bookDetails }): JSX.Element | null => {
         title={bookDetails?.name}
         subheader={
           <Box className="d-flex align-items-center gap-8">
-            <span>{bookDetails?.author}</span> <DividerDot size="small" />
-            {dateFormatter(bookDetails?.createdAt, "MMMM Do YYYY")}
+            <Box
+              sx={{
+                flex: 0.8,
+                overflow: "hidden",
+                display: "-webkit-box",
+                WebkitLineClamp: "1",
+                WebkitBoxOrient: "vertical",
+              }}
+            >
+              {bookDetails?.author}
+            </Box>{" "}
+            <DividerDot size="small" />
+            <Box
+              sx={{
+                flex: 1,
+                overflow: "hidden",
+                display: "-webkit-box",
+                WebkitLineClamp: "1",
+                WebkitBoxOrient: "vertical",
+              }}
+            >
+              {dateFormatter(bookDetails?.createdAt, "MMMM Do YYYY")}
+            </Box>
           </Box>
         }
       />
-      <CardContent sx={{ pt: 0 }}>
+      <CardContent sx={{ pt: 0, height: "calc(100% - 120px)" }}>
         <Typography
           variant="body2"
           sx={{
