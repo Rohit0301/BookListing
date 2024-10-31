@@ -5,14 +5,16 @@ import CustomModal from "../../../components/ui/CustomModal";
 interface Props {
   title: string;
   okText: string;
+  buttonText?: string;
   renderButtonComponent?: ReactElement;
 }
 
 const AddEditBookModal: FC<Props> = ({
   title,
   okText,
+  buttonText,
   renderButtonComponent,
-}) => {
+}): JSX.Element => {
   const [disabledButton, setDisabledButton] = useState<boolean>(true);
   const formRef = useRef<{ submitForm: Function }>(null);
 
@@ -24,7 +26,7 @@ const AddEditBookModal: FC<Props> = ({
       showFooter
       title={title}
       okText={okText}
-      buttonText={okText}
+      buttonText={buttonText || okText}
       onOk={handleOk}
       modalBody={
         <AddEditBookForm ref={formRef} setDisabledButton={setDisabledButton} />

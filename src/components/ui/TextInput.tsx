@@ -16,7 +16,6 @@ interface Props {
   ) => void;
   value?: string;
   rows?: number;
-  required?: boolean
   placeholder?: string;
   multiline?: boolean;
   otherProps?: object;
@@ -30,7 +29,6 @@ const TextInput: FC<Props> = ({
   name = "",
   error = "",
   onChange,
-  required = false,
   placeholder = "",
   multiline = false,
   otherProps = {},
@@ -42,7 +40,6 @@ const TextInput: FC<Props> = ({
         id={id}
         name={name}
         rows={rows}
-        required={required}
         error={Boolean(error)}
         placeholder={placeholder || label}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
