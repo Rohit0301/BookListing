@@ -19,6 +19,7 @@ import {
 import DividerDot from "../../../components/ui/DividerDot";
 import CustomButton from "../../../components/ui/CustomButton";
 import DeleteModal from "../../deleteBook/components/DeleteModal";
+import AddEditBookModal from "../../addEditBook/components/AddEditBookModal";
 
 interface Props {
   bookDetails: IBook;
@@ -60,7 +61,14 @@ const BookCard: FC<Props> = ({ bookDetails }): JSX.Element | null => {
         </Typography>
       </CardContent>
       <CardActions className="justify-content-end">
-        <CustomButton label="Edit" Icon={<EditOutlinedIcon />} />
+        <AddEditBookModal
+          title="Edit Book Detials"
+          okText="Edit Book"
+          bookDetails={bookDetails}
+          renderButtonComponent={
+            <CustomButton label="Edit" Icon={<EditOutlinedIcon />} />
+          }
+        />
         <DeleteModal
           bookId={bookDetails?.id}
           renderButtonComponent={

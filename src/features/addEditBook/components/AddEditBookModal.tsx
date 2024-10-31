@@ -1,3 +1,4 @@
+import { IBook } from "../../../types";
 import { FC, ReactElement, useRef, useState } from "react";
 import AddEditBookForm from "../forms/AddEditBookForm";
 import CustomModal from "../../../components/ui/CustomModal";
@@ -5,6 +6,7 @@ import CustomModal from "../../../components/ui/CustomModal";
 interface Props {
   title: string;
   okText: string;
+  bookDetails?: IBook;
   buttonText?: string;
   renderButtonComponent?: ReactElement;
 }
@@ -13,6 +15,7 @@ const AddEditBookModal: FC<Props> = ({
   title,
   okText,
   buttonText,
+  bookDetails,
   renderButtonComponent,
 }): JSX.Element => {
   const [disabledButton, setDisabledButton] = useState<boolean>(true);
@@ -29,7 +32,11 @@ const AddEditBookModal: FC<Props> = ({
       buttonText={buttonText || okText}
       onOk={handleOk}
       modalBody={
-        <AddEditBookForm ref={formRef} setDisabledButton={setDisabledButton} />
+        <AddEditBookForm
+          ref={formRef}
+          bookDetails={bookDetails}
+          setDisabledButton={setDisabledButton}
+        />
       }
       buttonComponent={renderButtonComponent}
       okButtonProps={{ disabled: disabledButton }}

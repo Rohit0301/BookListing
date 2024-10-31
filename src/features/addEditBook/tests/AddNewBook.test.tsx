@@ -7,7 +7,7 @@ import { useBookContext } from "../../../context/bookListing";
 
 jest.mock("../../../context/bookListing", () => ({
     useBookContext: jest.fn(),
-  }));
+}));
 
 describe("Add New Book", () => {
     const mockAddNewBook = jest.fn()

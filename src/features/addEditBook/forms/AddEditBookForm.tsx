@@ -7,17 +7,20 @@ import {
   useImperativeHandle,
 } from "react";
 import Box from "@mui/material/Box";
-import { generateUniqueId, isEmpty } from "../../../lib/utils";
+
+import { IBook } from "../../../types";
 import TextInput from "../../../components/ui/TextInput";
+import { generateUniqueId, isEmpty } from "../../../lib/utils";
 import { useBookContext } from "../../../context/bookListing";
 
 interface Props {
+  bookDetails?: IBook;
   setDisabledButton: (val: boolean) => void;
 }
 
 const AddEditBookForm = forwardRef(
-  ({ setDisabledButton }: Props, ref): JSX.Element => {
-    const { addNewBook } = useBookContext() || {};
+  ({ setDisabledButton, bookDetails }: Props, ref): JSX.Element => {
+    const { addNewBook, editBookDetails } = useBookContext() || {};
     const [formData, setFormData] = useState<{ [key: string]: string }>({});
     const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
 
@@ -35,6 +38,13 @@ const AddEditBookForm = forwardRef(
     }, [formErrors]);
 
     useEffect(() => {
+      if (!isEmpty(bookDetails)) {
+        setFormData(bookDetails as {});
+        setFormErrors({ name: "", author: "", description: "" });
+      }
+    }, [bookDetails, setDisabledButton]);
+
+    useEffect(() => {
       const isValid: boolean = isFormValid();
       setDisabledButton(!isValid);
     }, [formErrors, isFormValid, setDisabledButton]);
@@ -46,8 +56,8 @@ const AddEditBookForm = forwardRef(
       switch (name) {
         case "author":
           return /^[A-Za-z\s.]+$/.test(value)
-          ? ""
-          : "Author name must contain letters and periods only";
+            ? ""
+            : "Author name must contain letters and periods only";
         case "description":
           return value.length <= 500
             ? ""
@@ -66,11 +76,13 @@ const AddEditBookForm = forwardRef(
     };
 
     const handleFormSubmit = () => {
-      addNewBook &&
-        addNewBook({
+      const submitHandler = isEmpty(bookDetails) ? addNewBook : editBookDetails;
+      submitHandler &&
+        submitHandler({
           ...formData,
-          id: generateUniqueId(),
-          createdAt: new Date(),
+          ...(formData?.["id"]
+            ? {}
+            : { id: generateUniqueId(), createdAt: new Date() }),
         } as any);
     };
 
