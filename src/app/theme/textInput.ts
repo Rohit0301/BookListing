@@ -17,13 +17,22 @@ export const textInputStyles = {
       },
     },
   },
+  MuiFormHelperText: {
+    styleOverrides: {
+      root: {
+        margin: 0
+      },
+    },
+  },
   MuiFormLabel: {
     styleOverrides: {
       root: {
+        color: "#333",
         display: "block",
-        fontWeight: 600,
+        fontWeight: 500,
         fontSize: "14px",
-        color: "#4e4e4e",
+        marginBottom: "2px",
+        letterSpacing: "0.02em",
       },
     },
   },
