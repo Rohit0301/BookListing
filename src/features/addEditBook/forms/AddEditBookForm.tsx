@@ -45,9 +45,9 @@ const AddEditBookForm = forwardRef(
       }
       switch (name) {
         case "author":
-          return /^[A-Za-z\s]+$/.test(value)
-            ? ""
-            : "Author name must contain letters only";
+          return /^[A-Za-z\s.]+$/.test(value)
+          ? ""
+          : "Author name must contain letters and periods only";
         case "description":
           return value.length <= 500
             ? ""
