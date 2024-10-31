@@ -7,6 +7,7 @@ describe("TextInput", () => {
   test("Render text input and label correctly", () => {
     render(
       <TextInput
+        name="sample"
         id="Sample"
         label="Sample label"
         value="Sample"
@@ -22,7 +23,12 @@ describe("TextInput", () => {
   test("Change input text when user is typing", async () => {
     const user = userEvent.setup();
     render(
-      <TextInput id="Sample" label="Sample label" onChange={mockChange} />
+      <TextInput
+        id="Sample"
+        name="sample"
+        label="Sample label"
+        onChange={mockChange}
+      />
     );
     const textFieldElement: HTMLElement = screen.getByRole("textbox");
     await user.type(textFieldElement, "Abc");
@@ -32,6 +38,7 @@ describe("TextInput", () => {
   test("Render textArea if we pass props multiline", () => {
     render(
       <TextInput
+        name="sample"
         id="Sample"
         label="Sample label"
         multiline

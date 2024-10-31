@@ -6,6 +6,7 @@ import InputLabel from "@mui/material/InputLabel";
 
 interface Props {
   id: string;
+  name: string;
   label: string;
   error?: string;
   onChange: (
@@ -15,6 +16,7 @@ interface Props {
   ) => void;
   value?: string;
   rows?: number;
+  required?: boolean
   placeholder?: string;
   multiline?: boolean;
   otherProps?: object;
@@ -25,8 +27,10 @@ const TextInput: FC<Props> = ({
   label,
   value,
   rows = 4,
+  name = "",
   error = "",
   onChange,
+  required = false,
   placeholder = "",
   multiline = false,
   otherProps = {},
@@ -36,8 +40,10 @@ const TextInput: FC<Props> = ({
       <InputLabel htmlFor={id}>{label}</InputLabel>
       <TextField
         id={id}
-        error={Boolean(error)}
+        name={name}
         rows={rows}
+        required={required}
+        error={Boolean(error)}
         placeholder={placeholder || label}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
           onChange(event.target.value, event.target.name, event)
