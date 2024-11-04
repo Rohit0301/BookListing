@@ -17,7 +17,6 @@ export const addEditFormValidation: yup.ObjectSchema<
   name: yup
     .string()
     .required("Please enter a valid book name")
-    .matches(/^[A-Za-z\s]+$/, "Book name must contain letters and spaces")
     .min(2, "Book name must be at least 2 characters long")
     .max(100, "Book name must not exceed 100 characters"),
   author: yup

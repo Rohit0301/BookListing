@@ -67,22 +67,24 @@ export const SnackBarprovider: FC<{ children: ReactNode }> = ({ children }) => {
   };
   return (
     <Fragment>
-      <Snackbar
-        open={config?.open}
-        onClose={handleClose}
-        autoHideDuration={3000}
-        anchorOrigin={{ vertical: "top", horizontal: "right" }}
-        TransitionComponent={(props) => <Slide {...props} direction="left" />}
-      >
-        <Alert
-          variant="filled"
+      {config?.open && (
+        <Snackbar
+          open={config?.open}
           onClose={handleClose}
-          sx={{ width: "100%" }}
-          severity={config?.color || "info"}
+          autoHideDuration={3000}
+          anchorOrigin={{ vertical: "top", horizontal: "right" }}
+          TransitionComponent={(props) => <Slide {...props} direction="left" />}
         >
-          {config?.message || ""}
-        </Alert>
-      </Snackbar>
+          <Alert
+            variant="filled"
+            onClose={handleClose}
+            sx={{ width: "100%" }}
+            severity={config?.color || "info"}
+          >
+            {config?.message || ""}
+          </Alert>
+        </Snackbar>
+      )}
       <SnackBarContext.Provider value={{ showSuccessAlert, showFailureAlert }}>
         {children}
       </SnackBarContext.Provider>

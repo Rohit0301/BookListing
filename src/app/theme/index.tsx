@@ -23,7 +23,33 @@ export const themeOptions: ThemeOptions = {
   spacing: 8,
   components: {
     ...textInputStyles,
-    ...modalStyles
+    ...modalStyles,
+    MuiCardHeader: {
+      styleOverrides: {
+        title: {
+          overflow: "hidden",
+          display: "-webkit-box",
+          WebkitLineClamp: "1",
+          WebkitBoxOrient: "vertical",
+        },
+        subheader: {
+          fontStyle: "italic",
+        },
+      },
+    },
+    MuiCardContent: {
+      styleOverrides: {
+        root: {
+          p: {
+            color: "#6e6e6e",
+            overflow: "hidden",
+            display: "-webkit-box",
+            WebkitLineClamp: "3",
+            WebkitBoxOrient: "vertical",
+          },
+        },
+      },
+    }
   },
 };
 
