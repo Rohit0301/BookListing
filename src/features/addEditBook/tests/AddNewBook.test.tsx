@@ -4,6 +4,7 @@ import { render, screen } from "@testing-library/react";
 import AddEditBookModal from "../components/AddEditBookModal";
 import { useBookContext } from "../../../context/bookListing";
 
+// Mock the useBookContext hook to control its behavior in tests
 jest.mock("../../../context/bookListing", () => ({
   useBookContext: jest.fn(),
 }));
@@ -31,6 +32,8 @@ describe("Add New Book", () => {
     });
     expect(buttonElement).toBeInTheDocument();
     await user.click(buttonElement);
+
+    // Verify that required fields are displayed within the modal
     expect(screen.getByText("Book Name")).toBeInTheDocument();
     expect(screen.getByText("Author Name")).toBeInTheDocument();
     expect(screen.getByText("Book Description")).toBeInTheDocument();
@@ -53,19 +56,19 @@ describe("Add New Book", () => {
     expect(buttonElement).toBeInTheDocument();
     await user.click(buttonElement);
 
-    // Book name validation
+    // Validate "Book Name" field by typing and clearing
     const nameInputElement: HTMLElement = screen.getByLabelText("Book Name");
     await user.type(nameInputElement, "abc");
     expect(nameInputElement).toHaveValue("abc");
     await user.clear(nameInputElement);
 
-    // author name validation
+    // Validate "Author Name" field with invalid input
     const authorInputElement: HTMLElement =
       screen.getByLabelText("Author Name");
     await user.type(authorInputElement, "abc1");
     expect(authorInputElement).toHaveValue("abc1");
 
-    // description validation
+    // Validate "Book Description" field with invalid length
     const descriptionInputElement: HTMLElement =
       screen.getByLabelText("Book Description");
     await user.type(descriptionInputElement, "abc");
@@ -74,6 +77,7 @@ describe("Add New Book", () => {
     await user.type(descriptionInputElement, "A".repeat(501));
     await user.click(screen.getByRole("button", { name: "Add Book" }));
 
+    // Attempt form submission with errors and check for error messages
     expect(
       screen.getByText("Please enter a valid book name")
     ).toBeInTheDocument();
@@ -105,11 +109,13 @@ describe("Add New Book", () => {
     expect(buttonElement).toBeInTheDocument();
     await user.click(buttonElement);
 
+    // Fill out form fields with valid data
     await user.type(screen.getByLabelText("Book Name"), "Abc");
     await user.type(screen.getByLabelText("Author Name"), "Def");
     await user.type(screen.getByLabelText("Book Description"), "Ghi");
     await user.click(screen.getByRole("button", { name: "Add Book" }));
 
+    // Check that addNewBook was called with correct data
     expect(mockAddNewBook).toHaveBeenCalledWith({
       name: "Abc",
       author: "Def",

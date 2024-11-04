@@ -2,8 +2,8 @@ import { FC } from "react";
 import { Box } from "@mui/material";
 
 interface Props {
-  size: "small" | "medium" | "large";
-  sx?: object;
+  size: "small" | "medium" | "large"; // Determines the size of the divider dot
+  sx?: object; // Optional custom styles to apply to the Box component
 }
 
 export const SIZES: { [key: string]: { width: string; height: string } } = {

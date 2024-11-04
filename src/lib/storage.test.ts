@@ -2,6 +2,9 @@ import { IBook } from "../types";
 import { setDataToStorage, getDataFromStorage } from "./storage";
 import { parseDataWithDate } from "./utils";
 
+// Mocking the alert function
+const mockShowFailureAlert = jest.fn();
+
 describe("localStorage Utility Functions", () => {
   const sampleKey = "bookList";
   const sampleBookList: IBook[] = [
@@ -36,5 +39,33 @@ describe("localStorage Utility Functions", () => {
     localStorage.setItem(sampleKey, "invalid-json");
     const result = getDataFromStorage<typeof sampleBookList>(sampleKey);
     expect(result).toBeNull();
+  });
+
+  test("shows alert on error while setting data", () => {
+    // Override localStorage to throw an error
+    const originalSetItem = Storage.prototype.setItem;
+    Storage.prototype.setItem = jest.fn(() => {
+      throw new Error("Storage error");
+    });
+    setDataToStorage(sampleKey, sampleBookList, mockShowFailureAlert);
+    expect(mockShowFailureAlert).toHaveBeenCalledWith("Something went wrong while storing data");
+
+    // Restore the original implementation
+    Storage.prototype.setItem = originalSetItem;
+  });
+
+  test("shows alert on error while getting data", () => {
+    // Override localStorage to throw an error
+    const originalGetItem = Storage.prototype.getItem;
+    Storage.prototype.getItem = jest.fn(() => {
+      throw new Error("Storage error");
+    });
+
+    const result = getDataFromStorage<typeof sampleBookList>(sampleKey, mockShowFailureAlert);
+    expect(result).toBeNull();
+    expect(mockShowFailureAlert).toHaveBeenCalledWith("Something went wrong while fetching data");
+
+    // Restore the original implementation
+    Storage.prototype.getItem = originalGetItem;
   });
 });

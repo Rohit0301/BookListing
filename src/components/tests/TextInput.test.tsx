@@ -14,9 +14,11 @@ describe("TextInput", () => {
         onChange={mockChange}
       />
     );
+    // Assert that the input element is present in the document
     const textFieldElement: HTMLElement = screen.getByRole("textbox");
     expect(textFieldElement).toBeInTheDocument();
     expect(textFieldElement).toHaveValue("Sample");
+    // Assert that the label is rendered correctly
     expect(screen.getByText("Sample label")).toBeInTheDocument();
   });
 
@@ -32,6 +34,7 @@ describe("TextInput", () => {
     );
     const textFieldElement: HTMLElement = screen.getByRole("textbox");
     await user.type(textFieldElement, "Abc");
+    // Assert that the input's value has been updated correctly
     expect(textFieldElement).toHaveValue("Abc");
   });
 
@@ -46,6 +49,7 @@ describe("TextInput", () => {
       />
     );
     const textAreaElement: HTMLElement = screen.getByRole("textbox");
+    // Assert that the textarea element is present in the document
     expect(textAreaElement).toBeInTheDocument();
   });
 });

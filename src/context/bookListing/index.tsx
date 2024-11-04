@@ -31,41 +31,66 @@ export const BookListingProvider: FC<{ children: ReactNode }> = ({
 }): JSX.Element => {
   const [booksList, setBooksList] = useState<IBook[]>([]);
   const [selectedBook, setSeletedBook] = useState<IBook | null>(null);
-  const { showSuccessAlert, showFailureAlert} = useContext(SnackBarContext);
+  const { showSuccessAlert, showFailureAlert } = useContext(SnackBarContext);
 
   useEffect(() => {
     loadBooksFromStorage();
   }, []);
 
+  /**
+   * Loads the list of books from local storage and updates the state.
+   */
   const loadBooksFromStorage = (): void => {
-    setBooksList(parseDataWithDate(getDataFromStorage(BOOK_LIST_KEY, showFailureAlert)) || []);
+    setBooksList(
+      parseDataWithDate(getDataFromStorage(BOOK_LIST_KEY, showFailureAlert)) ||
+        []
+    );
   };
 
+  /**
+   * Updates the state with a new book list and stores it in local storage.
+   * @param bookList - The updated list of books.
+   */
   const storeDataToState = (bookList: IBook[]): void => {
     setBooksList(bookList);
     setDataToStorage(BOOK_LIST_KEY, bookList);
   };
 
+  /**
+   * Adds a new book to the list and stores the updated list in local storage.
+   * Displays a success alert upon successful addition.
+   * @param book - The book to add.
+   */
   const addNewBook = (book: IBook): void => {
     const updateBookList: IBook[] = [...booksList, book];
     storeDataToState(updateBookList);
-    showSuccessAlert("New book added successfully!")
+    showSuccessAlert("New book added successfully!");
   };
 
+  /**
+   * Edits the details of an existing book and updates the state and local storage.
+   * Displays a success alert upon successful edit.
+   * @param updatedBook - The book with updated details.
+   */
   const editBookDetails = (updatedBook: IBook): void => {
     const updateBookList: IBook[] = booksList.map((book: IBook) =>
       book.id === updatedBook.id ? { ...book, ...updatedBook } : book
     );
     storeDataToState(updateBookList);
-    showSuccessAlert("Book details edited successfully!")
+    showSuccessAlert("Book details edited successfully!");
   };
 
+  /**
+   * Removes a book from the list based on its ID, updates the state, and local storage.
+   * Displays a success alert upon successful deletion.
+   * @param bookId - The ID of the book to remove.
+   */
   const removeBookFromList = (bookId: number): void => {
     const updateBookList: IBook[] = booksList.filter(
       (book: IBook) => book.id !== bookId
     );
     storeDataToState(updateBookList);
-    showSuccessAlert("Book deleted successfully!")
+    showSuccessAlert("Book deleted successfully!");
   };
 
   return (
