@@ -1,42 +1,45 @@
-import Box from "@mui/material/Box";
-import Modal from "@mui/material/Modal";
-import Typography from "@mui/material/Typography";
-import CloseOutlined from "@mui/icons-material/CloseOutlined";
 import React, {
   FC,
   Fragment,
   MouseEvent,
-  ReactElement,
-  ReactNode,
+  ReactElement
 } from "react";
+import Box from "@mui/material/Box";
+import Modal from "@mui/material/Modal";
+import Typography from "@mui/material/Typography";
+import CloseOutlined from "@mui/icons-material/CloseOutlined";
 
 import CustomButton from "./CustomButton";
 
 interface Props {
   title: string;
-  modalBody?: ReactNode;
+  okText?: string;
   showFooter?: boolean;
   buttonText?: string;
   cancelText?: string;
-  okText?: string;
+  modalBody?: ReactElement;
+  showOkButton?: boolean;
   okButtonProps?: object;
-  onCancel?: (event: MouseEvent<HTMLButtonElement>) => void;
-  onOk?: (event: MouseEvent<HTMLButtonElement>) => void;
   buttonComponent?: ReactElement;
+  onOk?: (event: MouseEvent<HTMLButtonElement>) => void;
+  onCancel?: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
-const CustomModal: FC<Props> = ({
-  title,
-  modalBody,
-  onCancel = null,
-  onOk = null,
-  cancelText = "Cancel",
-  okText = "Save",
-  showFooter = false,
-  buttonComponent = null,
-  buttonText = "Open",
-  okButtonProps = {}
-}) => {
+const CustomModal: FC<Props> = (
+  {
+    title,
+    modalBody,
+    onOk = null,
+    onCancel = null,
+    okText = "Save",
+    cancelText = "Cancel",
+    showFooter = false,
+    buttonComponent = null,
+    buttonText = "Open",
+    showOkButton = false,
+    okButtonProps = {},
+  }
+) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -49,13 +52,18 @@ const CustomModal: FC<Props> = ({
     handleClose();
   };
   const handleOk = (event: MouseEvent<HTMLButtonElement>) => {
-    if (onOk) onOk(event);
-    handleClose();
+    if (onOk) {
+      onOk(event);
+      handleClose();
+    }
   };
   return (
     <Fragment>
       {buttonComponent ? (
-         React.cloneElement(buttonComponent, { label: buttonText, onClick: handleOpen })
+        React.cloneElement(buttonComponent, {
+          label: buttonText,
+          onClick: handleOpen,
+        })
       ) : (
         <CustomButton label={buttonText} onClick={handleOpen} />
       )}
@@ -74,7 +82,11 @@ const CustomModal: FC<Props> = ({
               Icon={<CloseOutlined />}
             />
           </Box>
-          {Boolean(modalBody) && modalBody}
+          {modalBody && 
+           React.cloneElement(modalBody, {
+            onClose: handleClose,
+          })
+          }
           {showFooter && (
             <Box
               className="d-flex align-items-center justify-content-end gap-12"
@@ -88,10 +100,14 @@ const CustomModal: FC<Props> = ({
                 color="secondary"
                 onClick={handleCancel}
                 label={cancelText}
-                otherProps={{ variant: "outlined"}}
+                otherProps={{ variant: "outlined" }}
               />
-              {Boolean(onOk) && (
-                <CustomButton onClick={handleOk} label={okText} {...okButtonProps} />
+              {(showOkButton || Boolean(onOk)) && (
+                <CustomButton
+                  onClick={handleOk}
+                  label={okText}
+                  {...okButtonProps}
+                />
               )}
             </Box>
           )}

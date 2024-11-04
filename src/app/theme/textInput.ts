@@ -6,12 +6,14 @@ export const textInputStyles = {
         padding: 0,
         "& input": {
           padding: 0,
+          fontSize: "14px",
           '::placeholder': {
             fontSize: '14px',
           },
         },
         "& textarea": {
           padding: 0,
+          fontSize: "14px",
           '::placeholder': {
             fontSize: '14px',
           },

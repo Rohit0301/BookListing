@@ -43,7 +43,7 @@ const BookCard: FC<Props> = ({ bookDetails }): JSX.Element | null => {
           <Box className="d-flex align-items-center gap-8">
             <Box
               sx={{
-                flex: 0.8,
+                maxWidth: "40%",
                 overflow: "hidden",
                 display: "-webkit-box",
                 WebkitLineClamp: "1",
@@ -87,7 +87,11 @@ const BookCard: FC<Props> = ({ bookDetails }): JSX.Element | null => {
           okText="Edit Book"
           bookDetails={bookDetails}
           renderButtonComponent={
-            <CustomButton label="Edit" Icon={<EditOutlinedIcon />} />
+            <CustomButton
+              label="Edit"
+              color="secondary"
+              Icon={<EditOutlinedIcon />}
+            />
           }
         />
         <DeleteModal
