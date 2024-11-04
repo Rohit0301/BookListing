@@ -68,18 +68,7 @@ const BookCard: FC<Props> = ({ bookDetails }): JSX.Element | null => {
         }
       />
       <CardContent sx={{ pt: 0, height: "calc(100% - 120px)" }}>
-        <Typography
-          variant="body2"
-          sx={{
-            color: "text.secondary",
-            overflow: "hidden",
-            display: "-webkit-box",
-            WebkitLineClamp: "3",
-            WebkitBoxOrient: "vertical",
-          }}
-        >
-          {bookDetails?.description}
-        </Typography>
+        <Typography variant="body2">{bookDetails?.description}</Typography>
       </CardContent>
       <CardActions className="justify-content-end">
         <AddEditBookModal
