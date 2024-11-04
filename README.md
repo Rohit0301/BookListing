@@ -4,6 +4,8 @@
 
 This application is a **Book Listing Page** built with **TypeScript**, **React**, and **Jest** for testing. Users can view, create, update, and delete books, and the application uses local storage for data persistence.
 
+![Alt text](public/images/booking-page-ui.png)
+
 ## Features
 
 - **View Books**: Display a list of books with details including:
