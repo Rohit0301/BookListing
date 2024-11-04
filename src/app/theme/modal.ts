@@ -11,6 +11,9 @@ export const modalStyles = {
           borderRadius: "4px",
           backgroundColor: "#fff",
           transform: "translate(-50%, -50%)",
+          "&:focus-visible": {
+            outline: "none"
+          }
         },
       },
     },
