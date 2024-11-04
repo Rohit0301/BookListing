@@ -7,8 +7,9 @@ import {
   createContext,
   useContext,
 } from "react";
-import { parseDataWithDate } from "../../lib/utils";
 import { IBook } from "../../types";
+import { SnackBarContext } from "../snackbar";
+import { parseDataWithDate } from "../../lib/utils";
 import { getDataFromStorage, setDataToStorage } from "../../lib/storage";
 
 const BOOK_LIST_KEY = "book-list";
@@ -30,13 +31,14 @@ export const BookListingProvider: FC<{ children: ReactNode }> = ({
 }): JSX.Element => {
   const [booksList, setBooksList] = useState<IBook[]>([]);
   const [selectedBook, setSeletedBook] = useState<IBook | null>(null);
+  const { showSuccessAlert, showFailureAlert} = useContext(SnackBarContext);
 
   useEffect(() => {
     loadBooksFromStorage();
   }, []);
 
   const loadBooksFromStorage = (): void => {
-    setBooksList(parseDataWithDate(getDataFromStorage(BOOK_LIST_KEY)) || []);
+    setBooksList(parseDataWithDate(getDataFromStorage(BOOK_LIST_KEY, showFailureAlert)) || []);
   };
 
   const storeDataToState = (bookList: IBook[]): void => {
@@ -47,6 +49,7 @@ export const BookListingProvider: FC<{ children: ReactNode }> = ({
   const addNewBook = (book: IBook): void => {
     const updateBookList: IBook[] = [...booksList, book];
     storeDataToState(updateBookList);
+    showSuccessAlert("New book added successfully!")
   };
 
   const editBookDetails = (updatedBook: IBook): void => {
@@ -54,6 +57,7 @@ export const BookListingProvider: FC<{ children: ReactNode }> = ({
       book.id === updatedBook.id ? { ...book, ...updatedBook } : book
     );
     storeDataToState(updateBookList);
+    showSuccessAlert("Book details edited successfully!")
   };
 
   const removeBookFromList = (bookId: number): void => {
@@ -61,6 +65,7 @@ export const BookListingProvider: FC<{ children: ReactNode }> = ({
       (book: IBook) => book.id !== bookId
     );
     storeDataToState(updateBookList);
+    showSuccessAlert("Book deleted successfully!")
   };
 
   return (
