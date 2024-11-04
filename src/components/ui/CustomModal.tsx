@@ -12,17 +12,17 @@ import CloseOutlined from "@mui/icons-material/CloseOutlined";
 import CustomButton from "./CustomButton";
 
 interface Props {
-  title: string;
-  okText?: string;
-  showFooter?: boolean;
-  buttonText?: string;
-  cancelText?: string;
-  modalBody?: ReactElement;
-  showOkButton?: boolean;
-  okButtonProps?: object;
-  buttonComponent?: ReactElement;
-  onOk?: (event: MouseEvent<HTMLButtonElement>) => void;
-  onCancel?: (event: MouseEvent<HTMLButtonElement>) => void;
+  title: string; // The title of the modal, displayed at the top
+  okText?: string; // Optional text for the OK button (default is "Save")
+  showFooter?: boolean; // Optional flag to show the footer with action buttons
+  buttonText?: string; // Optional text for the button that opens the modal (default is "Open")
+  cancelText?: string; // Optional text for the Cancel button (default is "Cancel")
+  modalBody?: ReactElement; // Optional React element to be displayed as the body of the modal
+  showOkButton?: boolean; // Optional flag to show the OK button if there is an onOk handler
+  okButtonProps?: object; // Optional additional props for the OK button
+  buttonComponent?: ReactElement; // Optional custom button component to open the modal
+  onOk?: (event: MouseEvent<HTMLButtonElement>) => void; // Optional handler for OK button click
+  onCancel?: (event: MouseEvent<HTMLButtonElement>) => void; // Optional handler for Cancel button click
 }
 
 const CustomModal: FC<Props> = (

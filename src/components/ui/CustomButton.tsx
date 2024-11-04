@@ -4,12 +4,12 @@ import { FC, Fragment, MouseEvent, ReactNode } from "react";
 
 
 interface Props {
-  label: string;
-  Icon?: ReactNode;
-  disabled?: boolean;
-  onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
-  color?: "primary" | "secondary" | "success" | "error" | "info" | "warning";
-  otherProps?: object;
+  label: string; // The text displayed on the button
+  Icon?: ReactNode; // Optional icon component to display instead of a text label
+  disabled?: boolean; // Optional prop to disable the button
+  onClick?: (event: MouseEvent<HTMLButtonElement>) => void; // Function to call on button click
+  color?: "primary" | "secondary" | "success" | "error" | "info" | "warning"; // MUI color variants
+  otherProps?: object; // Additional props to spread on the button
 }
 
 const CustomButton: FC<Props> = ({

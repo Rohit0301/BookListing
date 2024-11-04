@@ -4,16 +4,16 @@ import TextField from "@mui/material/TextField";
 import InputLabel from "@mui/material/InputLabel";
 
 interface Props {
-  id: string;
-  name: string;
-  label: string;
-  error?: string;
-  value?: string;
-  rows?: number;
-  placeholder?: string;
-  multiline?: boolean;
-  otherProps?: object;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  id: string; // Unique identifier for the input field
+  name: string; // Name attribute for the input field
+  label: string; // Label text for the input field
+  error?: string; // Optional error message to display
+  value?: string; // Optional value for the input field
+  rows?: number; // Number of rows for multiline input
+  placeholder?: string; // Placeholder text for the input field
+  multiline?: boolean; // Indicates if the input should be a textarea
+  otherProps?: object; // Additional props to spread onto the TextField component
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void; // Function to handle input changes
 }
 
 const TextInput: FC<Props> = ({

@@ -4,9 +4,13 @@ import React, {
   ReactNode,
   useContext,
   useState,
+  Fragment,
   createContext,
 } from "react";
-import { Alert, Slide, Snackbar, SnackbarCloseReason } from "@mui/material";
+import Alert from "@mui/material/Alert";
+import Slide from "@mui/material/Slide";
+import Snackbar from "@mui/material/Snackbar";
+import { SnackbarCloseReason } from "@mui/material";
 
 interface ISnackBarContext {
   showSuccessAlert: (message: string) => void;
@@ -25,6 +29,10 @@ export const SnackBarprovider: FC<{ children: ReactNode }> = ({ children }) => {
     color?: "success" | "error" | "info";
   }>({ open: false });
 
+  /**
+   * showSuccessAlert - Displays a success message in the Snackbar.
+   * @param message - The message to be displayed in the Snackbar.
+   */
   const showSuccessAlert = (message: string) => {
     setConfig((prev) => ({
       ...prev,
@@ -34,6 +42,10 @@ export const SnackBarprovider: FC<{ children: ReactNode }> = ({ children }) => {
     }));
   };
 
+  /**
+   * showFailureAlert - Displays an error message in the Snackbar.
+   * @param message - The message to be displayed in the Snackbar.
+   */
   const showFailureAlert = (message: string) => {
     setConfig((prev) => ({
       ...prev,
@@ -54,7 +66,7 @@ export const SnackBarprovider: FC<{ children: ReactNode }> = ({ children }) => {
     setConfig({ open: false });
   };
   return (
-    <>
+    <Fragment>
       <Snackbar
         open={config?.open}
         onClose={handleClose}
@@ -74,7 +86,7 @@ export const SnackBarprovider: FC<{ children: ReactNode }> = ({ children }) => {
       <SnackBarContext.Provider value={{ showSuccessAlert, showFailureAlert }}>
         {children}
       </SnackBarContext.Provider>
-    </>
+    </Fragment>
   );
 };
 
