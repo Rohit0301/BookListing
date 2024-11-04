@@ -46,4 +46,35 @@ To run the application locally, follow these steps:
    npm start
 4. To run the unit tests, execute:
    ```bash
-   npm test -- --coverage --coveragePathIgnorePatterns="src/context" --coveragePathIgnorePatterns="src/app" --coveragePathIgnorePatterns="src/types"
+   npm test -- --coverage --watchAll
+
+### Test Coverage
+
+File                             | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+---------------------------------|---------|----------|---------|---------|-------------------
+All files                        |   97.97 |    95.04 |     100 |   97.84 |                   
+ components/ui                   |     100 |    94.73 |     100 |     100 |                   
+  CustomButton.tsx               |     100 |      100 |     100 |     100 |                   
+  CustomModal.tsx                |     100 |    95.83 |     100 |     100 | 51                
+  DividerDot.tsx                 |     100 |      100 |     100 |     100 |                   
+  TextInput.tsx                  |     100 |     87.5 |     100 |     100 | 25                
+ constants                       |     100 |      100 |     100 |     100 |                   
+  mock.ts                        |     100 |      100 |     100 |     100 |                   
+ features/addEditBook            |     100 |      100 |     100 |     100 |                   
+  index.tsx                      |     100 |      100 |     100 |     100 |                   
+ features/addEditBook/components |     100 |      100 |     100 |     100 |                   
+  AddEditBookModal.tsx           |     100 |      100 |     100 |     100 |                   
+ features/addEditBook/forms      |     100 |      100 |     100 |     100 |                   
+  AddEditBookForm.tsx            |     100 |      100 |     100 |     100 |                   
+  validation.ts                  |     100 |      100 |     100 |     100 |                   
+ features/deleteBook/components  |     100 |      100 |     100 |     100 |                   
+  DeleteModal.tsx                |     100 |      100 |     100 |     100 |                   
+ features/listBooks              |     100 |       80 |     100 |     100 |                   
+  index.tsx                      |     100 |       80 |     100 |     100 | 9                 
+ features/listBooks/components   |     100 |      100 |     100 |     100 |                   
+  BookCard.tsx                   |     100 |      100 |     100 |     100 |                   
+  NoBooksFound.tsx               |     100 |      100 |     100 |     100 |                   
+ lib                             |   95.65 |    91.66 |     100 |   95.34 |                   
+  storage.ts                     |     100 |      100 |     100 |     100 |                   
+  utils.ts                       |   94.11 |    88.88 |     100 |   93.54 | 39,88             
+
