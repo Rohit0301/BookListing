@@ -3,7 +3,7 @@ import CustomModal from "../../../components/ui/CustomModal";
 import { useBookContext } from "../../../context/bookListing";
 
 interface Props {
-  bookId: number;
+  bookId: string;
   renderButtonComponent?: ReactElement;
 }
 

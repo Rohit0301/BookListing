@@ -21,14 +21,14 @@ const AddEditBookForm = ({
 
   const formik = useFormik({
     initialValues: {
-      id: bookDetails?.id || 0,
+      id: bookDetails?.id || "",
       name: bookDetails?.name || "",
       author: bookDetails?.author || "",
       createdAt: bookDetails?.createdAt || new Date(),
       description: bookDetails?.description || "",
     },
     validationSchema: addEditFormValidation,
-    onSubmit: (values) => {
+    onSubmit: (values: IBook) => {
       handleFormSubmit(values);
       onClose && onClose();
     },
