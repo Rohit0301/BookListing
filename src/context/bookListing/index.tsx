@@ -7,8 +7,9 @@ import {
   createContext,
   useContext,
 } from "react";
+import { toast } from "react-toastify";
+
 import { IBook } from "../../types";
-import { SnackBarContext } from "../snackbar";
 import { parseDataWithDate } from "../../lib/utils";
 import { getDataFromStorage, setDataToStorage } from "../../lib/storage";
 
@@ -31,7 +32,6 @@ export const BookListingProvider: FC<{ children: ReactNode }> = ({
 }): JSX.Element => {
   const [booksList, setBooksList] = useState<IBook[]>([]);
   const [selectedBook, setSeletedBook] = useState<IBook | null>(null);
-  const { showSuccessAlert, showFailureAlert } = useContext(SnackBarContext);
 
   useEffect(() => {
     loadBooksFromStorage();
@@ -41,10 +41,7 @@ export const BookListingProvider: FC<{ children: ReactNode }> = ({
    * Loads the list of books from local storage and updates the state.
    */
   const loadBooksFromStorage = (): void => {
-    setBooksList(
-      parseDataWithDate(getDataFromStorage(BOOK_LIST_KEY, showFailureAlert)) ||
-        []
-    );
+    setBooksList(parseDataWithDate(getDataFromStorage(BOOK_LIST_KEY)) || []);
   };
 
   /**
@@ -64,7 +61,7 @@ export const BookListingProvider: FC<{ children: ReactNode }> = ({
   const addNewBook = (book: IBook): void => {
     const updateBookList: IBook[] = [...booksList, book];
     storeDataToState(updateBookList);
-    showSuccessAlert("New book added successfully!");
+    toast.success("New book added successfully!");
   };
 
   /**
@@ -77,7 +74,7 @@ export const BookListingProvider: FC<{ children: ReactNode }> = ({
       book.id === updatedBook.id ? { ...book, ...updatedBook } : book
     );
     storeDataToState(updateBookList);
-    showSuccessAlert("Book details edited successfully!");
+    toast.success("Book details edited successfully!");
   };
 
   /**
@@ -90,7 +87,7 @@ export const BookListingProvider: FC<{ children: ReactNode }> = ({
       (book: IBook) => book.id !== bookId
     );
     storeDataToState(updateBookList);
-    showSuccessAlert("Book deleted successfully!");
+    toast.success("Book deleted successfully!");
   };
 
   return (
