@@ -2,21 +2,12 @@ import { toast } from "react-toastify";
 
 import { IBook } from "../types";
 import { parseDataWithDate } from "./utils";
+import { mockBooksList } from "../constants/mock";
 import { setDataToStorage, getDataFromStorage } from "./storage";
 
 
 describe("localStorage Utility Functions", () => {
   const sampleKey = "bookList";
-  const sampleBookList: IBook[] = [
-    {
-      id: 1,
-      name: "Harry potter",
-      author: "J. K. Rowling",
-      createdAt: new Date(),
-      description:
-        "Harry Potter is a series of seven fantasy novels written by British author J. K. Rowling. The novels chronicle the lives of a young wizard, Harry Potter, and his friends, Hermione Granger and Ron Weasley, all of whom are students at Hogwarts School of Witchcraft and Wizardry. ",
-    },
-  ];
 
   // Clearing storage before each test
   beforeEach(() => {
@@ -24,20 +15,20 @@ describe("localStorage Utility Functions", () => {
   });
 
   test("sets and get an object from localStorage", () => {
-    setDataToStorage(sampleKey, sampleBookList);
+    setDataToStorage(sampleKey, mockBooksList);
     const result: IBook[] | null =
-      getDataFromStorage<typeof sampleBookList>(sampleKey);
-    expect(parseDataWithDate(result)).toEqual(sampleBookList);
+      getDataFromStorage<typeof mockBooksList>(sampleKey);
+    expect(parseDataWithDate(result)).toEqual(mockBooksList);
   });
 
   test("returns null if the key does not exist in localStorage", () => {
-    const result = getDataFromStorage<typeof sampleBookList>("invalid-key");
+    const result = getDataFromStorage<typeof mockBooksList>("invalid-key");
     expect(result).toBeNull();
   });
 
   test("handles invalid JSON data gracefully", () => {
     localStorage.setItem(sampleKey, "invalid-json");
-    const result = getDataFromStorage<typeof sampleBookList>(sampleKey);
+    const result = getDataFromStorage<typeof mockBooksList>(sampleKey);
     expect(result).toBeNull();
   });
 
@@ -48,7 +39,7 @@ describe("localStorage Utility Functions", () => {
     Storage.prototype.setItem = jest.fn(() => {
       throw new Error("Storage error");
     });
-    setDataToStorage(sampleKey, sampleBookList);
+    setDataToStorage(sampleKey, mockBooksList);
     expect(toast.error).toHaveBeenCalledWith("Something went wrong while storing data");
 
     // Restore the original implementation
@@ -63,7 +54,7 @@ describe("localStorage Utility Functions", () => {
       throw new Error("Storage error");
     });
 
-    const result = getDataFromStorage<typeof sampleBookList>(sampleKey);
+    const result = getDataFromStorage<typeof mockBooksList>(sampleKey);
     expect(result).toBeNull();
     expect(toast.error).toHaveBeenCalledWith("Something went wrong while fetching data");
 

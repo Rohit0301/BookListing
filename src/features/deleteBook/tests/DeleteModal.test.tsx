@@ -20,7 +20,7 @@ jest.mock("../../../context/bookListing", () => ({
 
 describe("Delete Modal", () => {
   const mockRemoveBookFromList = jest.fn();
-  const mockBookId = 1;
+  const mockBookId = "abc-123";
 
   afterEach(() => {
     jest.clearAllMocks();

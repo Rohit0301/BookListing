@@ -20,7 +20,7 @@ interface IBookListingContext {
   selectedBook: IBook | null;
   addNewBook: (book: IBook) => void;
   editBookDetails: (book: IBook) => void;
-  removeBookFromList: (bookId: number) => void;
+  removeBookFromList: (bookId: string) => void;
   setSeletedBook: (book: IBook | null) => void;
 }
 
@@ -82,7 +82,7 @@ export const BookListingProvider: FC<{ children: ReactNode }> = ({
    * Displays a success alert upon successful deletion.
    * @param bookId - The ID of the book to remove.
    */
-  const removeBookFromList = (bookId: number): void => {
+  const removeBookFromList = (bookId: string): void => {
     const updateBookList: IBook[] = booksList.filter(
       (book: IBook) => book.id !== bookId
     );
