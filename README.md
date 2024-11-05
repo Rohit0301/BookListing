@@ -5,6 +5,7 @@
 This application is a **Book Listing Page** built with **TypeScript**, **React**, and **Jest** for testing. Users can view, create, update, and delete books, and the application uses local storage for data persistence.
 
 ![Alt text](public/images/booking-page-ui.png)
+![Alt text](public/images/end-to-end-test-playwright-ui.png)
 
 ## Features
 
@@ -49,6 +50,9 @@ To run the application locally, follow these steps:
 4. To run the unit tests, execute:
    ```bash
    npm test -- --coverage --watchAll
+4. To run the end-to-end tests using playwright, execute:
+   ```bash
+   npx playwright test --ui
 
 ### Test Coverage
 
