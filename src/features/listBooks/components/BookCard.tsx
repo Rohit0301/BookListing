@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import Avatar from "@mui/material/Avatar";
@@ -25,7 +25,7 @@ interface Props {
   bookDetails: IBook;
 }
 
-const BookCard: FC<Props> = ({ bookDetails }): JSX.Element | null => {
+const BookCard: FC<Props> = memo(({ bookDetails }): JSX.Element | null => {
   if (isEmpty(bookDetails)) return null;
   return (
     <Card sx={{ height: 200 }} aria-label="book-card">
@@ -96,6 +96,6 @@ const BookCard: FC<Props> = ({ bookDetails }): JSX.Element | null => {
       </CardActions>
     </Card>
   );
-};
+});
 
 export default BookCard;

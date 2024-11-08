@@ -1,6 +1,7 @@
 import React, {
   FC,
   Fragment,
+  memo,
   MouseEvent,
   ReactElement
 } from "react";
@@ -25,7 +26,7 @@ interface Props {
   onCancel?: (event: MouseEvent<HTMLButtonElement>) => void; // Optional handler for Cancel button click
 }
 
-const CustomModal: FC<Props> = (
+const CustomModal: FC<Props> = memo((
   {
     title,
     modalBody,
@@ -115,6 +116,6 @@ const CustomModal: FC<Props> = (
       </Modal>
     </Fragment>
   );
-};
+});
 
 export default CustomModal;

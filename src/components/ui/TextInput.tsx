@@ -16,7 +16,7 @@ interface Props {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void; // Function to handle input changes
 }
 
-const TextInput: FC<Props> = ({
+const TextInput: FC<Props> = React.memo(({
   id,
   label,
   value,
@@ -46,6 +46,6 @@ const TextInput: FC<Props> = ({
       />
     </Box>
   );
-};
+});
 
 export default TextInput;
