@@ -1,6 +1,6 @@
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
-import { FC, Fragment, MouseEvent, ReactNode } from "react";
+import { FC, Fragment, memo, MouseEvent, ReactNode } from "react";
 
 
 interface Props {
@@ -12,7 +12,7 @@ interface Props {
   otherProps?: object; // Additional props to spread on the button
 }
 
-const CustomButton: FC<Props> = ({
+const CustomButton: FC<Props> = memo(({
   label,
   Icon,
   onClick,
@@ -51,5 +51,5 @@ const CustomButton: FC<Props> = ({
       )}
     </Fragment>
   );
-};
+});
 export default CustomButton;

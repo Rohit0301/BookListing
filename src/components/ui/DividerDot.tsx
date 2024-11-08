@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import { Box } from "@mui/material";
 
 interface Props {
@@ -21,12 +21,12 @@ export const SIZES: { [key: string]: { width: string; height: string } } = {
   },
 };
 
-const DividerDot: FC<Props> = ({ size, sx = {} }) => {
+const DividerDot: FC<Props> = memo(({ size, sx = {} }) => {
   return (
     <Box 
       aria-label="divider-dot"
       sx={{ borderRadius: "50%", bgcolor: "#cecece", ...SIZES[size], ...sx }}
     ></Box>
   );
-};
+});
 export default DividerDot;
